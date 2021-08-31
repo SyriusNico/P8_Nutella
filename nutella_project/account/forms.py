@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 class RegisterForm(UserCreationForm):
     
     # Form's field
-    username = forms.CharField(label=('Nom utilisateur'))
+    username = forms.CharField(label=("Nom d'utilisateur"))
     password1 = forms.CharField(label=("Mot de passe"),
                                 widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirmer', widget=forms.PasswordInput)
