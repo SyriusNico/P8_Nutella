@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Categories, Products, Substitutes
+from .models import Categorie, Product, Favorite
 
-admin.site.register(Categories)
-admin.site.register(Products)
-admin.site.register(Substitutes)
+admin.site.register(Categorie)
+admin.site.register(Product)
+admin.site.register(Favorite)

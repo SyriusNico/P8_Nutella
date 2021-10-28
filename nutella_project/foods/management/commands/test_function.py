@@ -1,7 +1,7 @@
 import requests
 import pprint
 from django.core.management.base import BaseCommand
-from ...models import Categories, Products, Substitutes
+from ...models import Categories, Products, Favorite
 
 class Utils():
 

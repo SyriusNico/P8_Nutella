@@ -1,7 +1,7 @@
 import requests
 import pprint
 from django.core.management.base import BaseCommand
-from ...models import Categories, Products, Substitutes
+from ...models import Categorie, Product, Favorite
 
 class OffApi():
 
@@ -64,11 +64,11 @@ class OffApi():
 
 		for category in self.category:
 			products = self.getProductsFromOff(category)
-			categoryData = Categories.objects.create(name=category)
+			categoryData = Categorie.objects.create(name=category)
 			try:
 				for product in products:				
 					if self._can_be_created(product):
-						productData = Products( 
+						productData = Product( 
 							product_name=product.get('product_name'),
 							code=product.get('code'),
 							nutrition_grade=product.get('nutrition_grade_fr'),
@@ -87,8 +87,8 @@ class OffApi():
 				pass
 
 	def deleteDuplicate(self):
-		for product in Products.objects.all().reverse():
-			if Products.objects.filter(product_name=product.product_name).count() > 1 :
+		for product in Product.objects.all().reverse():
+			if Product.objects.filter(product_name=product.product_name).count() > 1 :
 				product.delete()	
 
 class Command(BaseCommand):

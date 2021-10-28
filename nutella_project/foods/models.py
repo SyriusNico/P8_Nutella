@@ -1,13 +1,14 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
-class Categories(models.Model):
+class Categorie(models.Model):
 	name = models.CharField(max_length=256)
 
 	def __str__(self):
 		return self.name
 
-class Products(models.Model):
+class Product(models.Model):
 	product_name = models.CharField(max_length=255)
 	code = models.CharField(max_length=255)
 	nutrition_grade = models.CharField(max_length=255)
@@ -17,15 +18,19 @@ class Products(models.Model):
 	salt = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	fat = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	proteins = models.DecimalField(max_digits=5, decimal_places=2, default=0)
-	category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
+	category_id = models.ForeignKey(Categorie, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.product_name
 
-class Substitutes(models.Model):
-	choosen_product = models.ForeignKey(Products, on_delete=models.CASCADE,
-											related_name='choosen_product')
-	substitue = models.ForeignKey(Products, on_delete=models.CASCADE,
+class Favorite(models.Model): # class Favorite
+	customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+										related_name='customer')
+	favorite = models.ForeignKey(Product, on_delete=models.CASCADE,
 											 related_name='substitute')
+
 	def __str__(self):
-		return self.substitue
+		return f"{self.customer}"
+
+	# maybe the TypeError come from here ?
+	# maybe I should add a field in this model for example a name or an email ?

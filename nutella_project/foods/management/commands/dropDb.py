@@ -1,10 +1,11 @@
 from django.core.management.base import BaseCommand
-from ...models import Categories, Products, Substitutes
+from ...models import Categorie, Product, Favorite
 
 def clearDatas():
 
-	Categories.objects.all().delete()
-	Products.objects.all().delete()
+	Categorie.objects.all().delete()
+	Product.objects.all().delete()
+	Favorite.objects.all().delete()
 
 class Command(BaseCommand):
 

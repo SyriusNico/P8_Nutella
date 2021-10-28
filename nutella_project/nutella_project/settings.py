@@ -31,8 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'pages.apps.PagesConfig',
-    'account.apps.AccountConfig',
+
+    
+
     'foods.apps.FoodsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authentication.apps.AuthenticationConfig',
+    'pages.apps.PagesConfig',
     'debug_toolbar',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +59,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'nutella_project.urls'
+
 
 TEMPLATES = [
     {
@@ -130,12 +135,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/dist'),    
 ]
 
-LOGIN_URL = '/account/login/'
-LOGIN_REDIRECT_URL = '/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'authentication.User'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
 
 INTERNAL_IPS = ['127.0.0.1']
