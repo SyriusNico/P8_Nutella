@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 
-from .views import UserRegisterView
+from authentication.views import UserRegisterView
 
 class UserRegisterViewTest(TestCase):
 	def setUp(self):

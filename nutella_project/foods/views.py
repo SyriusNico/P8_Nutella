@@ -34,7 +34,6 @@ class ResultView(ListView):
 	def get_queryset(self):
 		query = self.request.GET.get('searched')
 		if query:
-			print(User.username)
 			object_list = self.model.objects.filter(product_name__icontains=query)
 		else:
 			object_list = self.model.objects.none()
@@ -47,9 +46,9 @@ class ResultView(ListView):
 		query = self.request.GET.get('searched')
 		subs_list = self.utils.giveMeBetterThan(query)
 		try:
-			context['favorites_list'] = subs_list[:6]
+			context['product_list'] = subs_list[:6]
 		except TypeError:
-			context['favorites_list'] = subs_list
+			context['product_list'] = subs_list
 		return context 
 
 	# requires user to be logged in (done)
@@ -58,23 +57,10 @@ class ResultView(ListView):
 			return HttpResponseForbidden()
 		else:
 			productToAdd = self.request.POST.get('save', False)
-			first_pick = self.model.objects.filter(
-				product_name__icontains=self.request.GET.get('searched')
-				).first()
-			sub = self.model.objects.get(product_name=productToAdd)
-			favorite = Favorite.objects.create(
-				customer=User.objects.get(id=request.user.id),
-				favorite=sub)
-			return render(request, 'foods/success.html', {'favorite':favorite})
+			self.utils.saveMyChoice(request.user.id, productToAdd)
+			return render(request, 'foods/success.html')
 
 
-# def favorites(request):
-# 	if request.method == 'POST':
-# 		productToSave = request.POST.get('save', False)
-# 		subs = Product.objects.filter(product_name=productToSave)
-# 		# copy past example not the definitive variable
-# 		# new_product = subs.article_set.create(headline="John's second story", pub_date=date(2005, 7, 29))
-# 		return render(request, 'foods/favorites.html', { 'subs' : subs})
 
 
 class ProfilePageView(TemplateView):
@@ -83,8 +69,10 @@ class ProfilePageView(TemplateView):
 class FavoritesPageView(LoginRequiredMixin, ListView): 
 	template_name = 'foods/favorites.html'
 	context_object_name = 'favorites_list'
+	# print(context_object_name)
 
 	def get_queryset(self):
-		return Favorite.objects.filter(customer=self.request.user)	
+		return Favorite.objects.filter(customer=self.request.user)
+		# return Favorite.objects.select_related().filter(customer=self.request.user)	
 
 

@@ -28,9 +28,7 @@ class Favorite(models.Model): # class Favorite
 										related_name='customer')
 	favorite = models.ForeignKey(Product, on_delete=models.CASCADE,
 											 related_name='substitute')
-
+	# replace by product
 	def __str__(self):
 		return f"{self.customer}"
 
-	# maybe the TypeError come from here ?
-	# maybe I should add a field in this model for example a name or an email ?

@@ -5,37 +5,21 @@
 {% block title %}Résultat{% endblock %}
 {% block header%}
 	{% if object_list %}
-	{% for product in object_list%}
+	{% for object in object_list%}
 	<header>
 		<br>
 		<div class="container px-4 px-lg-5 h-100">
 			<div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
 				<div class="col-lg-4 col-sm-6 ">
-					<a class="portfolio-box" href="{% url 'detail' product.id %}" title="Produit">
+					<a class="portfolio-box" href="{% url 'detail' object.id %}" title="{{ object.product_name }}">
 					<br>
 					<br>
 					<br>
-					<img class="img-fluid" src="{{ product.url }}" alt="" />
-					<br>
-					<h2>{{ product.product_name }}</h2>
-					{% if product.nutrition_grade == 'a' %}
-					<img class="img-fluid" src="{% static 'assets/img/nutriscore_a.jpg' %}">
-					{% endif %}
-					{% if product.nutrition_grade == 'b' %}
-					<img class="img-fluid" src="{% static 'assets/img/nutriscore_b.jpg' %}">
-					{% endif %}
-					{% if product.nutrition_grade == 'c' %}
-					<img class="img-fluid" src="{% static 'assets/img/nutriscore_c.jpg' %}">
-					{% endif %}
-					{% if product.nutrition_grade == 'd' %}
-					<img class="img-fluid" src="{% static 'assets/img/nutriscore_d.jpg' %}">
-					{% endif %}
-					{% if product.nutrition_grade == 'e' %}
-					<img class="img-fluid" src="{% static 'assets/img/nutriscore_e.jpg' %}">
-					{% endif %}
-		   
+					<img class="img-fluid" src="{{ object.url }}" alt="{{ object.product_name }}" />
 				</div>
 			</div>
+			<br>
+			<br>
 		</div>
 	</header>   
 	{% endfor %}
@@ -44,12 +28,12 @@
 
 {% block content %}
 		<!-- Portfolio-->
-		{% if favorites_list %}
+		{% if product_list %}
 		<div id="portfolio">
 			<div class="container-fluid p-0">
 				<div class="row gx-4 gx-lg-5 justify-content-center">
 					<div class="col-lg-4 text-center">
-						{% if favorites_list %}
+						{% if product_list %}
 						<h2 class="text-black">Vous pouvez remplacer cet aliment par :</h2>
 						<br>
 						{% else%}
@@ -57,30 +41,45 @@
 						<br>
 						{% endif %}
 					</div>
-					<br>            		
+           		
 				</div>
-				<div class="row g-0 justify-content-center">
-					{% for favorite in favorites_list%}
-					<div class="col-lg-4 col-sm-6">
-						<a class="portfolio-box" href="{% url 'detail' favorite.id %}" title="Produit">
-							<center>
-							<img class="img-fluid" src="{{ favorite.url }}" alt="..." />
-							<div class="btn btn-primary position-absolute top"><h5>{{favorite.nutrition_grade}}</h5></div>
-							<div class="project-name"><h5>{{ favorite }}</h5>
-								<form action="" method="POST">
-								{% csrf_token %}
-								<button class="btn btn-primary btn-xl" name="save" type="submit" value="{{favorite.product_name}}">Sauvegarder</button>
-								</form>
-								<br>
-								<br>
+				<div class="row gx-4 gx-lg-5 justify-content-center">
+				{% for product in product_list%}
+					<div class="col-sm-4">
+						<div class="card">
+							<div class="card-header">
+								{% if product.nutrition_grade == 'a' %}
+								<img class="rounded float-end" src="{% static 'assets/img/nutriscore_a.jpg' %}" style="width:100px">
+								{% endif %}
+								{% if product.nutrition_grade == 'b' %}
+								<img class="rounded float-end" src="{% static 'assets/img/nutriscore_b.jpg' %}" style="width:100px">
+								{% endif %}
+								{% if product.nutrition_grade == 'c' %}
+								<img class="rounded float-end" src="{% static 'assets/img/nutriscore_c.jpg' %}" style="width:100px">
+								{% endif %}
+								{% if product.nutrition_grade == 'd' %}
+								<img class="rounded float-end" src="{% static 'assets/img/nutriscore_d.jpg' %}" style="width:100px">
+								{% endif %}
+								{% if product.nutrition_grade == 'e' %}
+								<img class="rounded float-end" src="{% static 'assets/img/nutriscore_e.jpg' %}" style="width:100px">
+								{% endif %}
 							</div>
-							</center>
-						</a>
+							<div class="card" style="width: 18rem">
+		  						<img src="{{ product.url }}" class="card-img-top" alt="{{ product.product_name}}">
+	                        </div>
+	 					 	<div class="card-body"> 
+	 					 		<a href="{% url 'detail' product.id %}" target="_blank"><h4 class="card-title">{{ product.product_name }}</h4></a>
+									<form action="" method="POST">
+									{% csrf_token %}
+									<button class="btn btn-primary btn-l" name="save" type="submit" value="{{product.product_name}}"><i class="fa fa-floppy-o" aria-hidden="true"></i> Sauvegarder</button>
+									</form>
+	  						</div>
+							
+						</div>
 					</div>
 				{% endfor %}
-				</div>	
-					
-<!-- 		{% else %}
+			</div>			
+		{% else %}
 			<header class="masthead">
 				<div class="container px-4 px-lg-5 h-100">
 					<div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
@@ -91,15 +90,17 @@
 						<div class="col-lg-8 align-self-baseline">
 							<h2 class="text-white-75 mb-5">Voulez vous réessayer ?</h2>
 						</div>
-						<div class="col-lg-8 align-self-baseline">
-							<form action="{% url 'result' %}" method="GET">
-								{% csrf_token %}
-								<input  type="search" placeholder="Entrer un nom de produit" name="searched">
-								<button class="btn btn-primary btn-xl" type="submit">Chercher</button>
-							</form>
-						</div>
+		                <div class="col-lg-8 align-self-baseline">
+		                    <form action="{% url 'result' %}" method="GET">
+		                        {% csrf_token %}
+		                        <div class="input-group">
+		                        <input  class="form-control mb-4 mb-sm-0" type="text" placeholder="Entrer un nom de produit" name="searched" value="{{ request.GET.searched}}">
+		                        <button class="btn btn-outline-primary btn-rounded btn-m my-0 ml-2" type="submit">Chercher</button>
+		                        </div>
+		                    </form>
+		                </div>
 					</div>
 				</div>
-			</header> -->
+			</header>
 		{% endif %}
 {% endblock %}

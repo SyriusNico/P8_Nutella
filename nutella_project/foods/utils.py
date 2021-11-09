@@ -1,6 +1,6 @@
 from django.db.models import Q
 from .models import Categorie, Product, Favorite
-
+from authentication.models import User
 
 class Utils():
 
@@ -8,6 +8,12 @@ class Utils():
 		results = Product.objects.filter(product_name__icontains=product)
 		result = results.first()
 		return result
+
+	def saveMyChoice(self, userId, productToAdd):
+		sub = Product.objects.get(product_name=productToAdd)
+		favorite = Favorite.objects.create(
+			customer=User.objects.get(id=userId),
+			favorite=sub)
 
 	def giveMeBetterThan(self, product):
 		objs = Product.objects.all().filter(product_name__icontains=product)
