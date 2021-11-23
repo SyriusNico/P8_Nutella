@@ -22,7 +22,7 @@
                         <form action="{% url 'register' %}" method="post">
                         {% csrf_token %}
                         {{ form | crispy }}
-                        <input type="submit" value="Valider">
+                        <input type="submit" value="Valider" id="valid-btn">
                         </form>
                     </div>
                 </div>

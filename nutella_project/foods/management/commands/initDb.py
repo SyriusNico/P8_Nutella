@@ -1,7 +1,7 @@
 import requests
-import pprint
 from django.core.management.base import BaseCommand
-from ...models import Categorie, Product, Favorite
+from ...models import Categorie, Product
+
 
 class OffApi():
 
@@ -59,7 +59,6 @@ class OffApi():
 		else:
 			return False
 
-
 	def storeDatas(self):
 
 		for category in self.category:
@@ -90,6 +89,7 @@ class OffApi():
 		for product in Product.objects.all().reverse():
 			if Product.objects.filter(product_name=product.product_name).count() > 1 :
 				product.delete()	
+
 
 class Command(BaseCommand):
 

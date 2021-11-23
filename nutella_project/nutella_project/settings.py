@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 
-    
+
 
     'foods.apps.FoodsConfig',
     'django.contrib.admin',
@@ -116,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr'
 
 TIME_ZONE = 'UTC'
 
@@ -132,7 +131,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/dist/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/dist'),    
+    os.path.join(BASE_DIR, 'static/dist'),
 ]
 
 

@@ -1,12 +1,14 @@
 from django.db import models
 from django.conf import settings
 
+
 # Create your models here.
 class Categorie(models.Model):
 	name = models.CharField(max_length=256)
 
 	def __str__(self):
 		return self.name
+
 
 class Product(models.Model):
 	product_name = models.CharField(max_length=255)
@@ -23,12 +25,16 @@ class Product(models.Model):
 	def __str__(self):
 		return self.product_name
 
-class Favorite(models.Model): # class Favorite
-	customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
-										related_name='customer')
+
+class Favorite(models.Model):
+	customer = models.ForeignKey(
+		settings.AUTH_USER_MODEL,
+		on_delete=models.CASCADE,
+		related_name='customer'
+	)
 	favorite = models.ForeignKey(Product, on_delete=models.CASCADE,
-											 related_name='substitute')
+										  related_name='substitute')
+
 	# replace by product
 	def __str__(self):
 		return f"{self.customer}"
-

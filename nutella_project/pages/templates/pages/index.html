@@ -19,7 +19,7 @@
                             {% csrf_token %}
                             <div class="input-group">
                             <input  class="form-control mb-4 mb-sm-0" type="text" placeholder="Entrer un nom de produit" name="searched" value="{{ request.GET.searched}}">
-                            <button class="btn btn-outline-primary btn-rounded btn-m my-0 ml-2" type="submit">Chercher</button>
+                            <button class="btn btn-outline-primary btn-rounded btn-m my-0 ml-2" type="submit" id="home-search-btn">Chercher</button>
                             </div>
                         </form>
                     </div>

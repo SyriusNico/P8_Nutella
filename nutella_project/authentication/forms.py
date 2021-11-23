@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
+
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(max_length=30)
@@ -12,12 +12,8 @@ class RegisterForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 
-
-
-
 class LoginForm(forms.Form):
 
     username = forms.CharField(label=("Nom d'utilisateur"))
     password = forms.CharField(label=("Mot de passe"),
                                widget=forms.PasswordInput)
-
