@@ -8,7 +8,7 @@ Create a website who compare food quality.
 
 This is a fictitious project aimed at creating an application for the restaurant Pur Beurre.
 
-### Requirements 
+## Requirements 
 
 	- python 3
 	- text editor
@@ -21,7 +21,7 @@ This is a fictitious project aimed at creating an application for the restaurant
 	pip install -r requirements.txt
 
 
-### Installation
+## Installation
 
 
 After importing the application on github you must initialize the database.
@@ -40,5 +40,7 @@ Then type the following command :
 	py manage.py runserver
 
  *This command is used to start a local server at the address 127.0.0.1*
+
+## Setting
 
 
