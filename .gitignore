@@ -1,5 +1,9 @@
 env/
 __pycache__/
+<<<<<<< HEAD
 node_modules
 settings.py
 
+=======
+settings.py
+>>>>>>> parent of e246ad0 (update)

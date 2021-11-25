@@ -130,7 +130,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+=======
+>>>>>>> parent of e246ad0 (update)
 =======
 >>>>>>> parent of e246ad0 (update)
 STATIC_URL = '/static/dist/'
