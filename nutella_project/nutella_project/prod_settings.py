@@ -1,4 +1,4 @@
-from settings import *
+from nutella_project.settings import *
 
 DEBUG = False
 
