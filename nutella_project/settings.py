@@ -23,11 +23,21 @@ SECRET_KEY = os.environ.get(
     'SECRET_KEY',
     'django-insecure-8z1t2)awwqen=bx==l2doak57wkou5%#81%565wbftgrn6$j$j'
 )
+if os.environ.get('ENV') == "PRODUCTION":
+    DEBUG = False
+    STATIC_ROOT = os.environ.join(BASE_DIR, 'staticfiles')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
+    STATICFILES_STORAGE = \
+        'whitenoise.storage.CompressedManifestStaticFilesStorage'
+else:
+    DEBUG = True
 
-ALLOWED_HOSTS = []
+
+
+ALLOWED_HOSTS = ["purbeurre-app.herokuapp.com","localhost", "127.0.0.1"]
 
 
 # Application definition
