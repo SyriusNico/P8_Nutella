@@ -1,5 +1,7 @@
 import requests
+from django.db.utils import IntegrityError
 from django.core.management.base import BaseCommand
+from nutella_project.settings import CATEGORIES_LIST, NB_RESULT
 from ...models import Categorie, Product
 
 
@@ -8,14 +10,8 @@ class OffApi():
 	def __init__(self):
 
 		self.url = 'https://fr.openfoodfacts.org/cgi/search.pl'
-		self.category = [
-			'Produit à tartiner',
-			'Petit-déjeuners',
-			'sauces',
-			'fromages',
-			'legumineuses'
-			]
-		self.page_size = 500
+		self.category = CATEGORIES_LIST
+		self.page_size = NB_RESULT
 
 	def payload(self, category):
 		payload = {
@@ -56,6 +52,8 @@ class OffApi():
 			return True
 		elif product['stores'] is not None:
 			return True
+		elif product[sugar] is not None:
+			return True
 		else:
 			return False
 
@@ -82,7 +80,7 @@ class OffApi():
 						productData.save()
 					else:
 					    print("Données incomplètes.")
-			except KeyError:
+			except (IntegrityError,KeyError) as e:
 				pass
 
 	def deleteDuplicate(self):
