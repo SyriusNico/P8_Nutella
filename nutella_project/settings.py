@@ -63,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -163,3 +164,7 @@ INTERNAL_IPS = ['127.0.0.1']
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+# Content security policy
+
+CSP_DEFAULT_SRC = ("'self'",)
