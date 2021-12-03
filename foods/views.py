@@ -13,7 +13,6 @@ class ProductDetailView(DetailView):
 	def get_object(self):
 		id_ = self.kwargs.get('id')
 		return get_object_or_404(Product, id=id_)
-	# TODO : Add link to the product
 
 
 class ResultView(ListView):

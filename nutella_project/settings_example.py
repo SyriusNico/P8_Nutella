@@ -147,3 +147,20 @@ LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+
+# Food setting 
+# You can add some categories from https://fr.openfoodfacts.org/categories
+CATEGORIES_LIST = [
+    'Produit à tartiner',
+    'Petit-déjeuners',
+    'sauces',
+    'fromages',
+    'legumineuses',
+    'Fruits',
+    'Pâtisseries',
+    'Biscuits et gâteaux',
+    'Boissons'
+    ]
+
+NB_RESULT = 30

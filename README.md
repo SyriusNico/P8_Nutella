@@ -43,4 +43,8 @@ Then type the following command :
 
 ## Setting
 
+You can make settings in the setting file in the nutella_project folder.
 
+Go to the category section of open food fact. Then copy the category that interests you in the variable **CATEGORIES_LIST**
+
+You can also modify the number of products found by modifying the variable **NB_RESULT**
