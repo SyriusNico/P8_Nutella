@@ -16,6 +16,7 @@ class Product(models.Model):
 	nutrition_grade = models.CharField(max_length=255)
 	stores = models.CharField(max_length=255)
 	url = models.URLField(max_length=255)
+	link = models.CharField(blank=True, max_length=255)
 	sugar = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	salt = models.DecimalField(max_digits=5, decimal_places=2, default=0)
 	fat = models.DecimalField(max_digits=5, decimal_places=2, default=0)

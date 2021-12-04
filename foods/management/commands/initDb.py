@@ -70,6 +70,7 @@ class OffApi():
 							code=product.get('code'),
 							nutrition_grade=product.get('nutrition_grade_fr'),
 							stores=product.get('stores'),
+							link=product.get('url'),
 							url=product.get('image_front_url'),
 							sugar=product['nutriments'].get('sugars_100g'),
 							salt=product['nutriments'].get('salt_100g'),
